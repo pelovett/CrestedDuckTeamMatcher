@@ -24,4 +24,20 @@ class Algorithm:
 
         return a_list
 
-
+class Student:
+        #A class to wrap all data for a student
+        #Format:
+        #   name         = String with user name
+        #   email        = String of email address
+        #   schedule     = String of binary describing acceptable timeslots
+        #   skills       = String of ints describing comfort with skills
+        #   pref_partner = email of partner to match desired
+        #   pref_project = int describing desired project
+        
+    def __init__(self, answer_dict):
+        self.name         = answer_dict["Name"]
+        self.email        = answer_dict["Email"]
+        self.schedule     = answer_dict["Schedule"]
+        self.skills       = answer_dict["Skills"]
+        self.pref_partner = answer_dict["Partners"]
+        self.pref_project = answer_dict["Project"]
