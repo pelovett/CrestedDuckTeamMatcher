@@ -18,15 +18,28 @@ class Algorithm:
         for i in range(self.iterations):
             self.possible.append(Algorithm.rand_order(self.students))
 
+        for poss in self.possible:
+            self.score(poss)
+
     def score(self, config):
         #Pass in possible ordering and return an int score for ordering
         #Start by scoring all normal-sized teams
         size = self.team_size
-        for index in range(team_count):
-            team = config[size*index:size*(index+1)]
-            #team is a list of the team member's indexes
-            for stud in team:
-                student = self.students[stud]
+        team_list = []
+        #Now loop through config and populate team_list
+        for index in range(self.team_count):
+            team_list.append(config[size*index:size*(index+1)])
+        for index in range(self.large_teams):
+            team_list.append(
+                    config[size*self.team_count+(size+1)*index :
+                           size*self.team_count+(size+1)*(index+1)] )
+
+        #Now iterate over team_list summing the scores of each team
+        total = 0
+        for team in team_list:
+            print("TODO")
+
+
 
     def print(self):
         print("Raw students: ")
