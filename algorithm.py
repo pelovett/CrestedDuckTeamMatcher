@@ -37,8 +37,18 @@ class Algorithm:
         #Now iterate over team_list summing the scores of each team
         total = 0
         for team in team_list:
-            print("TODO")
+            count = len(team)
+            for mem in range(count):
+                cur = int(mem)
+                while(cur < count):
+                    #Compare team members, we don't need to include the 
+                    #previous team members will already have been compared to us
+                    total += compare_sched(self.students[mem]["schedule"], 
+                                                self.students[cur]["schedule"])
 
+                    
+    def compare_sched(schedA, schedB):
+        for i in range(len(schedA)):
 
 
     def print(self):
