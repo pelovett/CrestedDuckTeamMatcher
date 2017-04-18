@@ -88,6 +88,22 @@ class Algorithm:
 
         #Return an integer score of the team configuration
         return total
+   
+
+    def team_print(self, team_list):
+        index = 0 #index into student_list
+        for team in range(self.team_count):
+            print(" - - Team "+str(team))
+            for mem in range(self.team_size):
+                print(self.students[index]['name'])
+                index += 1
+            print("\n") 
+        for team in range(self.large_teams):
+            print("- -Team "+str(team+self.team_count))
+            for mem in range(self.team_size+1):
+                print(self.students[index]['name'])
+                index += 1
+            print("\n")
 
 
     def print(self):
@@ -97,11 +113,11 @@ class Algorithm:
         print("\nPossibilities: ")
         for team in self.possible:
             print("----")
-            for member in team:
-                print(member['name'])
+            self.team_print(team)
         print("\nEnd Possibilities\n")
+        print("Best team found: ")
+        self.team_print(self.possible[self.best[0]])
         print("Team size: " + str(self.team_size))
-
         print("Number of normal teams: " + str(self.team_count))
         print("Number of teams with +1 members: " + str(self.large_teams))
 
