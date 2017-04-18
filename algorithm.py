@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import random
 import copy as cp
 
@@ -122,6 +123,4 @@ class Algorithm:
             temp_list[j] = temp
         
         return temp_list
-
-
 
