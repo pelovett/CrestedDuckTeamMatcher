@@ -23,7 +23,7 @@ function UploadFile() {
         var action = form.getAttribute('action')
         
         console.log("Sending to >", action);
-
+        
         sendXHRequest(formData, action);
     }
 }
@@ -35,6 +35,17 @@ function sendXHRequest(formData, uri) {
     // Set up request
     xhr.open('POST', uri, true);
     
-    // Send!
+    xhr.onreadystatechange = function (oEvent) {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText)
+            } else {
+                console.log("Error", xhr.statusText);
+            }  
+        }  
+    }
+    
+    // Send
     xhr.send(formData);
+
 }
