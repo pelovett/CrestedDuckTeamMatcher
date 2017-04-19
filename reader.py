@@ -32,11 +32,8 @@ def read_data(filename):
     
         #make schedule array
         times_available = list()
-        for i in range(2, 32, 6):
-            temp = list()
-            for i in range(i, i+6):
-                temp.append(arr[i])
-            times_available.append(temp)
+        for i in range(2, 32):
+            times_available.append(arr[i])
 
         #make skills array, converted to int
         skills = list()
@@ -60,7 +57,7 @@ def read_data(filename):
 
     return data
 
-'''
+
 #For testing, you can run python reader.py <results.csv>
 
 def main(argv):
@@ -74,4 +71,4 @@ def main(argv):
 
 if __name__ == "__main__":
   main(sys.argv[1:])
-'''
+
