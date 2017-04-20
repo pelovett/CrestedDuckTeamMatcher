@@ -7,10 +7,11 @@ class Algorithm:
     def __init__(self, student_list, run_count=5, teamsize=3):
         self.students = student_list
         self.possible = []
-        #Possible will hold different cofigs based on indexes into self.students
+        #Possible will hold diff groups based on indexes into self.students
         self.team_size = teamsize
         self.iterations = run_count
         #The number of teams of +1 size is the modulo of the stu count
+        #TODO produce logic for edge case with fewer students then team_size
         self.large_teams = len(student_list) % teamsize
         #We need to subtract the large teams from the # of normal teams
         self.team_count = len(student_list) // teamsize - self.large_teams
@@ -32,21 +33,24 @@ class Algorithm:
 
     def get_best(self):
         #Produce list of lists containing students
-        result = []
-        size = self.team_size
+        temp = []
+        s = self.team_size
         for i in range(self.team_count):
-            result.append(self.student_list[size*i:size*(index+1)])
+            temp.append(self.students[s*i:s*(i+1)])
         for i in range(self.large_teams):
-            result.append(self.student_list[size*self.team_count+(size+1)*i :
-                                            size*self.team_count+(size+1)*(i+1)] )
+            temp.append(self.students[s*self.team_count+(s+1)*i :
+                                            s*self.team_count+(s+1)*(i+1)] )
 
-        #Now replace the student objects with student names
-        for team in result:
+        #Now record the student names and emails
+        final = []
+        for team in temp:
+            maet = []
             for stu in team:
-                stu = stu["name"]
+                maet.append([stu["name"], stu["email"]])
+            final.append(maet)
         
         #Return list of teams, having names as strings
-        return result
+        return final
 
 
     def compare_sched(self, schedA, schedB):
@@ -82,7 +86,6 @@ class Algorithm:
                     #previous team members bc already compared to us
                     index_b = team[cur]
                     index_a = team[mem]
-                    #TODO Produce real test data and test this
                     total += self.compare_sched(index_a["schedule"], index_b["schedule"])
                     cur += 1
 

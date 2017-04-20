@@ -34,9 +34,23 @@ A tool for creating optimum teams in a class
 
 **Install NPM if you don't already have it.**
 
+- **macOS**
+- - `brew install npm`
+- **Debian Linux**
+- - `apt-get install npm`
+- **Arch Linux**
+- - `pacman -S npm`
+- **Fedora / Red Hat Linux**
+- - `dnf install npm`
+
 **Install Yarn:**
 
 - `npm install -g yarn`
+
+**Install React:**
+
+- `npm install -g react-scripts`
+
 
 **Install dependencies:**
 
