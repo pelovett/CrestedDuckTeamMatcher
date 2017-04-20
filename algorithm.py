@@ -46,7 +46,8 @@ class Algorithm:
         for team in temp:
             maet = []
             for stu in team:
-                maet.append([stu["name"], stu["email"]])
+                #Append the name and email of the students
+                maet.append([stu[0], stu[1]])
             final.append(maet)
         
         #Return list of teams, having names as strings
@@ -86,7 +87,8 @@ class Algorithm:
                     #previous team members bc already compared to us
                     index_b = team[cur]
                     index_a = team[mem]
-                    total += self.compare_sched(index_a["schedule"], index_b["schedule"])
+                    #Compare the scedules of the two students
+                    total += self.compare_sched(index_a[2], index_b[2])
                     cur += 1
 
         #Return an integer score of the team configuration
@@ -98,13 +100,15 @@ class Algorithm:
         for team in range(self.team_count):
             print(" - - Team "+str(team))
             for mem in range(self.team_size):
-                print(self.students[index]['name'])
+                #Print the name of a student
+                print(self.students[index][0])
                 index += 1
             print("\n") 
         for team in range(self.large_teams):
             print("- -Team "+str(team+self.team_count))
             for mem in range(self.team_size+1):
-                print(self.students[index]['name'])
+                #Print the name of a student
+                print(self.students[index][0])
                 index += 1
             print("\n")
 
@@ -128,6 +132,7 @@ class Algorithm:
     def set_team_size(self, newsize):
         self.team_size = newsize
         self.team_count = len(self.students) // newsize
+        #TODO The below line is wrong, needs to be fixed if used
         self.team_count += 0 if len(self.students) % newsize else 1
 
 
