@@ -7,18 +7,9 @@ import re
         [[name, email, [schedule], [skills], [teammate prefs]], [name, email, [schedule], [skills], [teammate prefs]], ...]
 '''
 def read_data(filename):
-    f = open(filename, 'r')
-    p = re.compile(',')
-    data = []
-    header = f.readline().strip()
-    varnames = p.split(header)
-    varnames.remove(varnames[0])
     data = list()
-    for l in f:
-        #remove quote char, newline char, and whitespaces
-        arr = l.replace('"', '').replace("\n", '')
-        #split by comma
-        arr = list(arr.split(","))
+    for l in filename[1:]:
+        arr = l
         #remove time stamp
         arr.remove(arr[0])
         
@@ -29,7 +20,7 @@ def read_data(filename):
                 arr[cur] = 1
             else:
                 arr[cur] = 0
-    
+
         #make schedule array
         times_available = list()
         for i in range(2, 32):
@@ -54,21 +45,6 @@ def read_data(filename):
         complete_arr.append(teammates)
 
         data.append(complete_arr)
-
+    
+    print(data)
     return data
-
-
-#For testing, you can run python reader.py <results.csv>
-
-def main(argv):
-  # Process command line arguments.
-  # (You shouldn't need to change this.)
-    if (len(argv) != 1):
-        print 'Usage: reader.py <results>'
-        sys.exit(2)
-    csv = read_data(argv[0])
-    print csv
-
-if __name__ == "__main__":
-  main(sys.argv[1:])
-
