@@ -14,7 +14,7 @@ class Result extends Component {
 			<div className="results-page">
 				<h1>The results are in!</h1>
 				<a href="/return-files/" target="blank">
-					<RaisedButton class='btn btn-default'>Download!</RaisedButton>
+					<RaisedButton className='btn btn-default'>Download!</RaisedButton>
 				</a>
 			</div>
 		);

@@ -25,7 +25,7 @@ from algorithm import Algorithm
 # Globals
 ###
 app = flask.Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+ 
 import CONFIG
 
 

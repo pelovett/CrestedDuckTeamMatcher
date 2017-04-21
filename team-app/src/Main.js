@@ -32,6 +32,8 @@ class Main extends Component {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           alert(xhr.responseText)
+          // browserHistory.push('result');
+          this.props.history.push('/result');
         } else {
           alert("Error", xhr.statusText);
         }
@@ -40,10 +42,10 @@ class Main extends Component {
 
     // Send
     xhr.send(formData);
-
   }
 
   handleClick(event) {
+    event.preventDefault();
     alert("Handle Click called!");
     var formData = new FormData();
 
