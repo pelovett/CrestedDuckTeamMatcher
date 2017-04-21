@@ -74,7 +74,7 @@ def transform_view():
 
     #TODO TypeError: list indices must be integers or slices, not str
     #something = Algorithm(csv_list).generate()
-    print(something)
+    #print(something)
 
     response = make_response(result)
 
