@@ -47,7 +47,7 @@ class Algorithm:
             maet = []
             for stu in team:
                 #Append the name and email of the students
-                maet.append([stu[0], stu[1]])
+                maet.append([stu[1], stu[2]])
             final.append(maet)
         
         #Return list of teams, having names as strings
@@ -88,7 +88,7 @@ class Algorithm:
                     index_b = team[cur]
                     index_a = team[mem]
                     #Compare the scedules of the two students
-                    total += self.compare_sched(index_a[2], index_b[2])
+                    total += self.compare_sched(index_a[3], index_b[3])
                     cur += 1
 
         #Return an integer score of the team configuration
@@ -101,14 +101,14 @@ class Algorithm:
             print(" - - Team "+str(team))
             for mem in range(self.team_size):
                 #Print the name of a student
-                print(self.students[index][0])
+                print(self.students[index][1])
                 index += 1
             print("\n") 
         for team in range(self.large_teams):
             print("- -Team "+str(team+self.team_count))
             for mem in range(self.team_size+1):
                 #Print the name of a student
-                print(self.students[index][0])
+                print(self.students[index][1])
                 index += 1
             print("\n")
 
