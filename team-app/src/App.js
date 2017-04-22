@@ -8,6 +8,8 @@ import Drawer from 'material-ui/Drawer';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MenuItem from 'material-ui/MenuItem';
 
+import Main from './Main';
+
 
 injectTapEventPlugin();
 
@@ -57,17 +59,7 @@ class App extends Component {
               <li>Kathryn Lovett</li>
             </ul>
           </Drawer>
-          <div className="App-body" style={styles.container}>
-            <h2>Time to match teams!</h2>
-            <p>Upload your .csv file to get started.</p>
-            <form id="file-form" action="/result" method="POST">
-                <RaisedButton containerElement="label" label="Select File" primary={true}>
-                  <input type="file" id="csv-select" name="csv-file" style={{ display: 'none' }} />
-                </RaisedButton>
-                <div style={styles.divider} />
-                <RaisedButton type="submit" id="upload-button" style={{textColor: 'white' }} primary={true}>Upload</RaisedButton>
-            </form>
-          </div>
+          {this.props.children}
         </div>
       </MuiThemeProvider>
     );

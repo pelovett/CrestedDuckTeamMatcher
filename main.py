@@ -9,6 +9,7 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from flask import make_response
+from flask_cors import CORS, cross_origin
 
 import io
 import csv
@@ -24,12 +25,21 @@ from algorithm import Algorithm
 # Globals
 ###
 app = flask.Flask(__name__)
+ 
 import CONFIG
 
 
 ###
 # Pages
 ###
+
+
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  return response
 
 @app.route("/")
 @app.route("/index")
@@ -42,7 +52,7 @@ def index():
 def transform(text_file_contents):
     return text_file_contents.replace("=", ",")
 
-@app.route('/result', methods=["POST"])
+@app.route('/result', methods=["POST", "OPTIONS"])
 def transform_view():
     f = request.files['csv-file']
     if not f:
@@ -64,7 +74,7 @@ def transform_view():
 
     #TODO TypeError: list indices must be integers or slices, not str
     #something = Algorithm(csv_list).generate()
-    print(something)
+    #print(something)
 
     response = make_response(result)
 
