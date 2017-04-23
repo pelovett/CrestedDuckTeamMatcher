@@ -64,7 +64,7 @@ def transform_view():
     csv_input = csv.reader(stream)
     #print("file contents: ", file_contents)
     #print(type(file_contents))
-    print(csv_input)
+    #print(csv_input)
     for row in csv_input:
         print(row)
         csv_list.append(row)
@@ -75,7 +75,8 @@ def transform_view():
 
     #something = Algorithm(csv_list).generate().get_best()
     #print(something)
-    print(result)
+    print("csv_list")
+    print(csv_list)
     flask.session['response'] = result
     return flask.render_template('result.html')
     #To work with react, comment out the previous return and use the one below
@@ -87,7 +88,7 @@ def transsform():
 
     result = flask.session['response']
     response = make_response(result)
-
+    response.headers["Content-type"] = "text/csv"
     response.headers["Content-Disposition"] = "attachment; filename=result.csv"
     print("from /transform_csv:"+result)
     return response
