@@ -44,6 +44,7 @@ class Main extends Component {
     xhr.send(formData);
   }
 
+
   handleClick(event) {
     event.preventDefault();
     alert("Handle Click called!");
@@ -66,6 +67,7 @@ class Main extends Component {
     var uri = "http://localhost:5000" + action;
 
     this.sendXHRequest(formData, uri);
+    location.href = 'result';
   }
 
   render() {
@@ -75,23 +77,24 @@ class Main extends Component {
         <p>Upload your .csv file to get started.</p>
         <form id="file-form" action="/result" method="POST">
             <RaisedButton containerElement="label" label="Select File" primary={true}>
-              <input 
-                type="file" 
-                id="csv-select" 
+              <input
+                type="file"
+                id="csv-select"
                 name="csv-file"
                 style={{ display: 'none' }} />
             </RaisedButton>
             <div style={styles.divider} />
-            <RaisedButton 
-              type="submit" 
-              id="upload-button" 
-              onClick={this.handleClick} 
-              style={{textColor: 'white' }} 
+            <RaisedButton
+              type="submit"
+              id="upload-button"
+              onClick={this.handleClick}
+              style={{textColor: 'white' }}
               primary={true}>Upload</RaisedButton>
         </form>
       </div>
     );
   }
+
 }
 
 export default Main;

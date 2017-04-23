@@ -25,7 +25,8 @@ from algorithm import Algorithm
 # Globals
 ###
 app = flask.Flask(__name__)
- 
+app.secret_key = "hello"
+
 import CONFIG
 
 
@@ -52,14 +53,13 @@ def index():
 def transform(text_file_contents):
     return text_file_contents.replace("=", ",")
 
-@app.route('/result', methods=["POST", "OPTIONS"])
+@app.route('/result', methods=["POST"])
 def transform_view():
-    f = request.files['csv-file']
+    f = request.files['data_file']
     if not f:
         return "No file"
 
     csv_list = []
-
     stream = io.StringIO(f.stream.read().decode("UTF8"), newline=None)
     csv_input = csv.reader(stream)
     #print("file contents: ", file_contents)
@@ -72,16 +72,30 @@ def transform_view():
     stream.seek(0)
     result = transform(stream.read())
 
-    #TODO TypeError: list indices must be integers or slices, not str
-    #something = Algorithm(csv_list).generate()
+    #something = Algorithm(csv_list).generate().get_best()
     #print(something)
+    print(result)
+    flask.session['response'] = result
+    return flask.render_template('result.html')
 
+
+@app.route('/transform_csv')
+def transsform():
+
+    result = flask.session['response']
     response = make_response(result)
 
     response.headers["Content-Disposition"] = "attachment; filename=result.csv"
-
-    #response.csv.html downloaded
     return response
+
+#JSON callback implementation
+'''function execute_solved() {
+     $.getJSON('/_solved',function(data) {
+       console.log("data: " + data)
+       csv = data.result.csv;
+       location.href = 'result';
+     });
+   }'''
 
 @app.errorhandler(404)
 def page_not_found(error):
