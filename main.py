@@ -72,9 +72,9 @@ def transform_view():
     stream.seek(0)
     result = transform(stream.read())
 
-    
-    something = Algorithm(csv_list).generate().get_best()
-    print(something)
+
+    #something = Algorithm(csv_list).generate().get_best()
+    #print(something)
     print(result)
     flask.session['response'] = result
     return flask.render_template('result.html')
