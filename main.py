@@ -89,7 +89,7 @@ def transsform():
     response = make_response(result)
 
     response.headers["Content-Disposition"] = "attachment; filename=result.csv"
-    print(result+"HELLO")
+    print("from /transform_csv:"+result)
     return response
 
 #JSON callback implementation
