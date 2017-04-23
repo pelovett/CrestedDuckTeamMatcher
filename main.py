@@ -55,7 +55,7 @@ def transform(text_file_contents):
 
 @app.route('/result', methods=["POST"])
 def transform_view():
-    f = request.files['data_file']
+    f = request.files['csv_file']
     if not f:
         return "No file"
 
@@ -72,11 +72,14 @@ def transform_view():
     stream.seek(0)
     result = transform(stream.read())
 
-    #something = Algorithm(csv_list).generate().get_best()
-    #print(something)
+    
+    something = Algorithm(csv_list).generate().get_best()
+    print(something)
     print(result)
     flask.session['response'] = result
     return flask.render_template('result.html')
+    #To work with react, comment out the previous return and use the one below
+    #return result
 
 
 @app.route('/transform_csv')
@@ -86,6 +89,7 @@ def transsform():
     response = make_response(result)
 
     response.headers["Content-Disposition"] = "attachment; filename=result.csv"
+    print(result+"HELLO")
     return response
 
 #JSON callback implementation

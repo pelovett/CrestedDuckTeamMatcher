@@ -50,13 +50,13 @@ class Main extends Component {
     alert("Handle Click called!");
     var formData = new FormData();
 
-    var fileInput = document.getElementById('csv-select');
+    var fileInput = document.getElementById('csv_file');
 
     var file = fileInput.files[0];
 
     alert("File name >" + file.name);
 
-    formData.append('csv-file', file);
+    formData.append('csv_file', file);
 
     // Sending to location defined in form
     var form = document.getElementById('file-form');
@@ -75,12 +75,12 @@ class Main extends Component {
       <div className="App-body" style={styles.container}>
         <h2>Time to match teams!</h2>
         <p>Upload your .csv file to get started.</p>
-        <form id="file-form" action="/result" method="POST">
+        <form id="file-form" action="/result" enctype="multipart/form-data" method="POST">
             <RaisedButton containerElement="label" label="Select File" primary={true}>
               <input
                 type="file"
-                id="csv-select"
-                name="csv-file"
+                id="csv_file"
+                name="csv_file"
                 style={{ display: 'none' }} />
             </RaisedButton>
             <div style={styles.divider} />
