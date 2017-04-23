@@ -8,14 +8,15 @@ const styles = {
   },
 };
 
+
 class Result extends Component {
 	render() {
 		return (
 			<div className="results-page">
 				<h1>The results are in!</h1>
-				<a href="/return-files/" target="blank">
-					<RaisedButton className='btn btn-default'>Download!</RaisedButton>
-				</a>
+        <form action="/transform_csv">
+            <input type="submit" />
+        </form>
 			</div>
 		);
 	}
