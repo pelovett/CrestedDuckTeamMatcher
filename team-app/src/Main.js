@@ -33,7 +33,8 @@ class Main extends Component {
         if (xhr.status === 200) {
           alert(xhr.responseText)
           // browserHistory.push('result');
-          this.props.history.push('/result');
+          // this.context.router.push('/result');
+          this.props.route.parentCallback(xhr.responseText);
         } else {
           alert("Error", xhr.statusText);
         }
