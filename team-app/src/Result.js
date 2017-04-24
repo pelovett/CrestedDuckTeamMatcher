@@ -8,6 +8,7 @@ const styles = {
   },
 };
 
+
 class Result extends Component {
 	render() {
 		var data;
@@ -20,10 +21,9 @@ class Result extends Component {
 		return (
 			<div className="results-page">
 				<h1>The results are in!</h1>
-				<a href="/return-files/" target="blank">
-					<RaisedButton className='btn btn-default'>Download!</RaisedButton>
-				</a>
-				<p>{data}</p>
+		        <form action="/transform_csv">
+		            <input type="submit" />
+		        </form>
 			</div>
 		);
 	}

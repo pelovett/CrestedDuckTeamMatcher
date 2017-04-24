@@ -25,7 +25,8 @@ from algorithm import Algorithm
 # Globals
 ###
 app = flask.Flask(__name__)
- 
+app.secret_key = "hello"
+
 import CONFIG
 
 
@@ -52,19 +53,18 @@ def index():
 def transform(text_file_contents):
     return text_file_contents.replace("=", ",")
 
-@app.route('/result', methods=["POST", "OPTIONS"])
+@app.route('/result', methods=["POST"])
 def transform_view():
-    f = request.files['csv-file']
+    f = request.files['csv_file']
     if not f:
         return "No file"
 
     csv_list = []
-
     stream = io.StringIO(f.stream.read().decode("UTF8"), newline=None)
     csv_input = csv.reader(stream)
     #print("file contents: ", file_contents)
     #print(type(file_contents))
-    print(csv_input)
+    #print(csv_input)
     for row in csv_input:
         print(row)
         csv_list.append(row)
@@ -72,16 +72,35 @@ def transform_view():
     stream.seek(0)
     result = transform(stream.read())
 
-    #TODO TypeError: list indices must be integers or slices, not str
-    #something = Algorithm(csv_list).generate()
+
+    #something = Algorithm(csv_list).generate().get_best()
     #print(something)
+    print("csv_list")
+    print(csv_list)
+    flask.session['response'] = result
+    return flask.render_template('result.html')
+    #To work with react, comment out the previous return and use the one below
+    #return result
 
+
+@app.route('/transform_csv')
+def transsform():
+
+    result = flask.session['response']
     response = make_response(result)
-
+    response.headers["Content-type"] = "text/csv"
     response.headers["Content-Disposition"] = "attachment; filename=result.csv"
-
-    #response.csv.html downloaded
+    print("from /transform_csv:"+result)
     return response
+
+#JSON callback implementation
+'''function execute_solved() {
+     $.getJSON('/_solved',function(data) {
+       console.log("data: " + data)
+       csv = data.result.csv;
+       location.href = 'result';
+     });
+   }'''
 
 @app.errorhandler(404)
 def page_not_found(error):
