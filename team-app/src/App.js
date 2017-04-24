@@ -23,6 +23,10 @@ const styles = {
     height: 'auto',
     display: 'inline-block',
   },
+  link: {
+    textDecoration: 'none',
+    color: 'white',
+  },
 };
 
 
@@ -37,6 +41,10 @@ class App extends Component {
     this.setState({ open: !this.state.open });
   }
 
+  myCallback(dataFromChild) {
+    this.setState({ csvData: dataFromChild });
+  }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
@@ -49,15 +57,17 @@ class App extends Component {
             docked={false}>
             <MenuItem onTouchTap={this.handleToggle} value={'/'} primaryText="Hide"/>
             <MenuItem>
-              <a href="https://github.com/pelovett/CrestedDuckTeamMatcher">Check Out Our Repo</a>
+              <a href="https://github.com/pelovett/CrestedDuckTeamMatcher" style={styles.link}>Github Repository</a>
             </MenuItem>
-            <ul style={{listStyle: 'none'}}>
-              <li>Created by:</li>
-              <li>Peter Lovett</li>
-              <li>Cathy Webster</li>
-              <li>Wyatt Reed</li>
-              <li>Kathryn Lovett</li>
-            </ul>
+            <MenuItem>
+              Created by:
+              <ul style={{listStyle: 'none'}}>
+                <li>Peter Lovett</li>
+                <li>Cathy Webster</li>
+                <li>Wyatt Reed</li>
+                <li>Kathryn Lovett</li>
+              </ul>
+            </MenuItem>
           </Drawer>
           {this.props.children}
         </div>

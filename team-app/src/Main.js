@@ -32,9 +32,6 @@ class Main extends Component {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           alert(xhr.responseText)
-          // browserHistory.push('result');
-          // this.context.router.push('/result');
-          this.props.route.parentCallback(xhr.responseText);
         } else {
           alert("Error", xhr.statusText);
         }
@@ -55,15 +52,11 @@ class Main extends Component {
 
     var file = fileInput.files[0];
 
-    alert("File name >" + file.name);
-
     formData.append('csv_file', file);
 
     // Sending to location defined in form
     var form = document.getElementById('file-form');
     var action = form.getAttribute('action');
-
-    alert("Sending to >" + action);
 
     var uri = "http://localhost:5000" + action;
 
@@ -76,7 +69,7 @@ class Main extends Component {
       <div className="App-body" style={styles.container}>
         <h2>Time to match teams!</h2>
         <p>Upload your .csv file to get started.</p>
-        <form id="file-form" action="/result" enctype="multipart/form-data" method="POST">
+        <form id="file-form" action="/result" encType="multipart/form-data" method="POST">
             <RaisedButton containerElement="label" label="Select File" primary={true}>
               <input
                 type="file"

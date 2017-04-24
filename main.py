@@ -29,7 +29,6 @@ app.secret_key = "hello"
 
 import CONFIG
 
-
 ###
 # Pages
 ###
@@ -53,7 +52,7 @@ def index():
 def transform(text_file_contents):
     return text_file_contents.replace("=", ",")
 
-@app.route('/result', methods=["POST"])
+@app.route('/result', methods=['POST'])
 def transform_view():
     f = request.files['csv_file']
     if not f:
@@ -78,18 +77,19 @@ def transform_view():
     print("csv_list")
     print(csv_list)
     flask.session['response'] = result
-    return flask.render_template('result.html')
+    #return flask.render_template('result.html')
     #To work with react, comment out the previous return and use the one below
-    #return result
+    return result
 
 
-@app.route('/transform_csv')
+@app.route('/transform_csv', methods=['GET', 'POST'])
 def transsform():
 
     result = flask.session['response']
     response = make_response(result)
     response.headers["Content-type"] = "text/csv"
     response.headers["Content-Disposition"] = "attachment; filename=result.csv"
+    response.headers.add('Access-Control-Allow-Origin', '*')
     print("from /transform_csv:"+result)
     return response
 
