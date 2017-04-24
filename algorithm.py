@@ -5,19 +5,7 @@ class Algorithm:
 
 
     def __init__(self, student_list, run_count=5, teamsize=3):
-        self.students = []
-        temp = student_list[1:]
-        for student in temp:
-            stu = []
-            stu.append(student[1])
-            stu.append(student[2])
-            for i in range(31):
-                stu.append(student[2+i])
-            for i in range(12):
-                stu.append(student[33+1])
-            stu.append(student[-1])
-            self.students.append(stu)
-
+        self.students = student_list
         self.possible = []
         #Possible will hold diff groups based on indexes into self.students
         self.team_size = teamsize
@@ -59,7 +47,7 @@ class Algorithm:
             maet = []
             for stu in team:
                 #Append the name and email of the students
-                maet.append([stu[1], stu[2]])
+                maet.append([stu[0], stu[1]])
             final.append(maet)
         
         #Return list of teams, having names as strings
@@ -68,9 +56,7 @@ class Algorithm:
 
     def compare_sched(self, schedA, schedB):
         mySum = 0
-        print("schedA: ", schedA, len(schedA))
-        print("schedB: ", schedB)
-        for i in range(len(schedA)-1):
+        for i in range(len(schedA)):
             if schedA[i] and schedB[i]:
                 mySum += 1
         return mySum
@@ -102,7 +88,7 @@ class Algorithm:
                     index_b = team[cur]
                     index_a = team[mem]
                     #Compare the scedules of the two students
-                    total += self.compare_sched(index_a[3], index_b[3])
+                    total += self.compare_sched(index_a[2], index_b[2])
                     cur += 1
 
         #Return an integer score of the team configuration
