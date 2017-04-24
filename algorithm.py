@@ -56,9 +56,7 @@ class Algorithm:
 
     def compare_sched(self, schedA, schedB):
         mySum = 0
-        print("schedA: ", schedA, len(schedA))
-        print("schedB: ", schedB)
-        for i in range(len(schedA)-1):
+        for i in range(len(schedA)):
             if schedA[i] and schedB[i]:
                 mySum += 1
         return mySum
