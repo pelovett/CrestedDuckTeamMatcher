@@ -5,7 +5,7 @@ class Algorithm:
 
 
     def __init__(self, student_list, run_count=5, teamsize=3):
-        self.studnets = []
+        self.students = []
         temp = student_list[1:]
         for student in temp:
             stu = []
@@ -68,7 +68,9 @@ class Algorithm:
 
     def compare_sched(self, schedA, schedB):
         mySum = 0
-        for i in range(len(schedA)):
+        print("schedA: ", schedA, len(schedA))
+        print("schedB: ", schedB)
+        for i in range(len(schedA)-1):
             if schedA[i] and schedB[i]:
                 mySum += 1
         return mySum
