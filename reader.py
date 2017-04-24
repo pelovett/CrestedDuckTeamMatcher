@@ -46,5 +46,4 @@ def read_data(filename):
 
         data.append(complete_arr)
     
-    print(data)
     return data

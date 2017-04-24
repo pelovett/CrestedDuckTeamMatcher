@@ -21,6 +21,8 @@ import logging
 import algorithm
 from algorithm import Algorithm
 
+import reader
+
 ###
 # Globals
 ###
@@ -72,11 +74,10 @@ def transform_view():
     stream.seek(0)
     result = transform(stream.read())
 
-
-    #something = Algorithm(csv_list).generate().get_best()
+    reader_result = reader.read_data(csv_list)
+    #something = Algorithm(reader_result).generate().get_best()
     #print(something)
-    print("csv_list")
-    print(csv_list)
+
     flask.session['response'] = result
     return flask.render_template('result.html')
     #To work with react, comment out the previous return and use the one below
