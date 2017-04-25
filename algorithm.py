@@ -22,7 +22,10 @@ class Algorithm:
         #Produce a series of random team assignments
         for i in range(self.iterations):
             self.possible.append(Algorithm.rand_order(self.students))
-
+        #TODO Iterate over every team and make swaps to improve
+        #In order to improve just calculate the worst matches
+        #And swap the other with the other worst match.
+        
         #Score each team and set best to point at the best one
         for j in range(len(self.possible)):
             cur_score = self.score(self.possible[j])
