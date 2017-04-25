@@ -101,14 +101,14 @@ class Algorithm:
             print(" - - Team "+str(team))
             for mem in range(self.team_size):
                 #Print the name of a student
-                print(self.students[index][1])
+                print(team_list[index][1])
                 index += 1
             print("\n") 
         for team in range(self.large_teams):
             print("- -Team "+str(team+self.team_count))
             for mem in range(self.team_size+1):
                 #Print the name of a student
-                print(self.students[index][1])
+                print(team_list[index][1])
                 index += 1
             print("\n")
 
