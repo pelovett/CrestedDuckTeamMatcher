@@ -1,5 +1,6 @@
 CONFIG.py
 yarn.lock
+node_modules
 # The rest are standard ignores from github
 
 # Byte-compiled / optimized / DLL files
