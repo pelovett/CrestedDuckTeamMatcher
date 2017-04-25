@@ -54,6 +54,8 @@ A tool for creating optimum teams in a class
 
 **Install dependencies:**
 
+- `cd team-app`
+
 - `yarn install`
 
 *You're ready to code!*
