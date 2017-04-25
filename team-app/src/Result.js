@@ -29,7 +29,7 @@ class Result extends Component {
 					alert(xhr.responseText)
 					// browserHistory.push('result');
 					// this.context.router.push('/result');
-					this.props.route.parentCallback(xhr.responseText);
+					// this.props.route.parentCallback(xhr.responseText);
 				} else {
 					alert("Error", xhr.statusText);
 				}
@@ -42,7 +42,7 @@ class Result extends Component {
 
 
 	handleSubmit(event) {
-		event.preventDefault();
+		// event.preventDefault();
 		alert("Handle Click called!");
 	    // var formData = new FormData();
 
@@ -53,15 +53,15 @@ class Result extends Component {
 	    // formData.append('csv_file', file);
 
 		// Sending to location defined in form
-		var form = document.getElementById('result-form');
-		var action = form.getAttribute('action');
+		// var form = document.getElementById('result-form');
+		// var action = form.getAttribute('action');
 
-		alert("Sending to >" + action);
+		// alert("Sending to >" + action);
 
-		var uri = "http://localhost:5000" + action;
+		var uri = "http://localhost:5000/transform_csv";
 
 		this.myXHRequest(uri);
-		location.href = 'transform_csv';
+		// location.href = 'transform_csv';
 	}
 
 
@@ -76,13 +76,13 @@ class Result extends Component {
 		return (
 			<div className="results-page" style={styles.container}>
 				<h1>The results are in!</h1>
-		        <form id="result-form" action="/transform_csv" method="post">
+		        {/*<form id="result-form" action="/transform_csv" method="post">*/}
 		            <RaisedButton 
-		            	label="Submit" 
+		            	label="Get Results" 
 		            	onClick={this.handleSubmit}>
-		            	<input type="submit" id="input" style={{ display: 'none' }} />
+		            	{/*<input type="submit" id="input" style={{ display: 'none' }} />*/}
 		            </RaisedButton>
-		        </form>
+		        {/*</form>*/}
 			</div>
 		);
 	}
