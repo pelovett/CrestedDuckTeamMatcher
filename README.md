@@ -53,13 +53,23 @@ A tool for creating optimum teams in a class
 
 
 **Install dependencies:**
+From inside of CrestedDuckTeamMatcher:
+- `bash ./configure`
+- `pip3 install flask`
+- `pip3 install flask_cors`
 
+In a new tab in Terminal:
+- `cd team-app`
 - `yarn install`
 
 *You're ready to code!*
+In your first tab (CrestedDuckTeamMatcher directory):
+- `python3 main.py`
 
+In your second tab (team-app directory):
 - `yarn start` - This begins the development server.
 
+Additional command options for React:
 - `yarn run build` - This bundles the application into static files for production (minimization, post-processing, etc.)
 
 - `yarn test` - This starts the test runner.
