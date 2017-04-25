@@ -87,7 +87,9 @@ def result():
 @app.route('/transform_csv', methods=['GET', 'POST'])
 def transform_csv():
 
-    result = flask.session['response']
+    #result = flask.session['response']
+    print(request.json)
+    result = request.json
 
     #Get the Algorithm Data (THX PETER)
     x = Algorithm(result)
@@ -108,9 +110,7 @@ def transform_csv():
     result = transform(output.read())
 
     response = make_response(result)
-    response.headers["Content-type"] = "text/csv"
-    response.headers["Content-Disposition"] = "attachment; filename=result.csv"
-    response.headers.add('Access-Control-Allow-Origin', '*')
+
     print("from /transform_csv:"+result)
     return response
 

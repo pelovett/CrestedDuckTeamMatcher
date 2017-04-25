@@ -85,32 +85,33 @@ class App extends Component {
     var xhr = new XMLHttpRequest();
 
     // Set up request
-    xhr.open('GET', 'http://localhost:5000/transform_csv', true);
+    xhr.open('POST', 'http://localhost:5000/transform_csv', true);
+    xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onreadystatechange = function (oEvent) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           alert(xhr.responseText)
-          // browserHistory.push('result');
-          // this.context.router.push('/result');
-          // this.props.route.parentCallback(xhr.responseText);
         } else {
           alert("Error", xhr.statusText);
         }
       }
     };
-
+    alert(JSON.stringify(this.state.csvData));
     // Send
-    xhr.send(null);
+    xhr.send(JSON.stringify(this.state.csvData));
   }
 
 
   handleClick(event) {
     event.preventDefault();
+
+    // Switching div from Main to Result
     var main = document.getElementById('mainDiv');
     main.style.display = 'none';
     var result = document.getElementById('resultDiv');
     result.style.display = 'block';
+
     alert("Handle Click called!");
     var formData = new FormData();
 
@@ -178,13 +179,10 @@ class App extends Component {
           </div>
           <div className="Result" style={styles.result} id="resultDiv">
             <h1>The results are in!</h1>
-            {/*<form id="result-form" action="/transform_csv" method="post">*/}
-                <RaisedButton 
-                  label="Get Results" 
-                  onClick={this.resultXHRequest}>
-                  {/*<input type="submit" id="input" style={{ display: 'none' }} />*/}
-                </RaisedButton>
-            {/*</form>*/}
+              <RaisedButton 
+                label="Get Results" 
+                onClick={this.resultXHRequest}>
+              </RaisedButton>
           </div>
         </div>
       </MuiThemeProvider>
