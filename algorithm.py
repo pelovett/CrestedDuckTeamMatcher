@@ -34,11 +34,12 @@ class Algorithm:
     def get_best(self):
         #Produce list of lists containing students
         temp = []
+        best_team = self.possible[self.best[0]]
         s = self.team_size
         for i in range(self.team_count):
-            temp.append(self.students[s*i:s*(i+1)])
+            temp.append(best_team[s*i:s*(i+1)])
         for i in range(self.large_teams):
-            temp.append(self.students[s*self.team_count+(s+1)*i :
+            temp.append(best_team[s*self.team_count+(s+1)*i :
                                             s*self.team_count+(s+1)*(i+1)] )
 
         #Now record the student names and emails
