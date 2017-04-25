@@ -5,9 +5,10 @@ Very simple Flask test page.
 
 
 import flask
-from flask import render_template
+from flask import render_template, redirect, url_for
 from flask import request
 from flask import url_for
+from flask import jsonify
 from flask import make_response
 from flask_cors import CORS, cross_origin
 
@@ -29,12 +30,13 @@ import reader
 app = flask.Flask(__name__)
 app.secret_key = "hello"
 
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
 import CONFIG
 
 ###
 # Pages
 ###
-
 
 @app.after_request
 def after_request(response):
@@ -55,7 +57,7 @@ def transform(text_file_contents):
     return text_file_contents.replace("=", ",")
 
 @app.route('/result', methods=['POST'])
-def transform_view():
+def result():
     f = request.files['csv_file']
     if not f:
         return "No file"
@@ -63,30 +65,48 @@ def transform_view():
     csv_list = []
     stream = io.StringIO(f.stream.read().decode("UTF8"), newline=None)
     csv_input = csv.reader(stream)
-    #print("file contents: ", file_contents)
-    #print(type(file_contents))
-    #print(csv_input)
+
     for row in csv_input:
         print(row)
         csv_list.append(row)
 
     stream.seek(0)
     result = transform(stream.read())
+    print(type(result))
 
     reader_result = reader.read_data(csv_list)
-    #something = Algorithm(reader_result).generate().get_best()
-    #print(something)
+    flask.session['response'] = reader_result
 
-    flask.session['response'] = result
     #return flask.render_template('result.html')
     #To work with react, comment out the previous return and use the one below
-    return result
+
+    rslt = { "csv": reader_result}
+    return jsonify(result=rslt)
 
 
 @app.route('/transform_csv', methods=['GET', 'POST'])
-def transsform():
+def transform_csv():
 
     result = flask.session['response']
+
+    #Get the Algorithm Data (THX PETER)
+    x = Algorithm(result)
+    x.generate()
+    y = x.get_best()
+
+    #Can't write to a file, so we're going to make an IO Stream
+    output = io.StringIO()
+    writer = csv.writer(output, quoting=csv.QUOTE_NONNUMERIC)
+    writer.writerows(y)
+    print(output.getvalue())
+
+    csv_input = csv.reader(output)
+    for row in csv_input:
+        print(row)
+
+    output.seek(0)
+    result = transform(output.read())
+
     response = make_response(result)
     response.headers["Content-type"] = "text/csv"
     response.headers["Content-Disposition"] = "attachment; filename=result.csv"
