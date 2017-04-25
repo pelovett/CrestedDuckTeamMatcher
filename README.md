@@ -70,11 +70,11 @@ In a new tab in Terminal:
 *You're ready to code!*  
 In your first tab (CrestedDuckTeamMatcher directory):  
 
-- `python3 main.py`
+- `python3 main.py` - This begins the Flask server.
 
 In your second tab (team-app directory):  
 
-- `yarn start` - This begins the development server.
+- `yarn start` - This begins the React development server.
 
 Additional command options for React:  
 
