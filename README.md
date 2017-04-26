@@ -39,6 +39,18 @@ A tool for creating optimum teams in a class. Our web application takes in surve
 - An example response can be found in the Git repository named "responses.csv".
 
 ## Requirements and Design
+- Minimal Viable Product
+    - Algorithm that matches people into groups based on schedule and skill set compatibility
+    - Simple and intuitive user-interface that allows user to upload CSV file with responses from a student survey
+    - User can download a CSV file with the results of the algorithm
+    - Expanded app to allow user to customize group sizes
+- Key files for the application
+    - algorithm.py: code for logic for team formation
+    - main.py: code for server-side logic.
+    - reader.py: code for logic of reading in CSV file
+    - writer.py: code for logic of writing results to CSV file
+    - templates/: contains all of the code for front-end, including HTML, JavaScript, and React.js
+
 
 ## Install
 *Follow these instructions to contribute to the project.*
