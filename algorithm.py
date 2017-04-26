@@ -8,6 +8,7 @@ class Algorithm:
         self.students = student_list
         self.possible = []
         #Possible will hold diff groups based on indexes into self.students
+        #ie. [2,3,5,1,9,0,6,8,7]
         self.team_size = teamsize
         self.iterations = run_count
         #The number of teams of +1 size is the modulo of the stu count
@@ -25,8 +26,8 @@ class Algorithm:
         length = len(self.possible[0])
         for poss in self.possible:
             old = self.score(poss)
-            for i in range(30):
-                #Swap two random values then check score again
+            #Swap two random values then check score again x100
+            for i in range(100):
                 x = random.randint(0,length-1)
                 y = random.randint(0,length-1)
                 
@@ -41,7 +42,6 @@ class Algorithm:
                     temp = poss[y]
                     poss[y] = poss[x]
                     poss[x] = temp
-            #This will run for slef.iterations loops
 
         #Score each team and set best to point at the best one
         for j in range(len(self.possible)):
@@ -64,9 +64,10 @@ class Algorithm:
 
         #Now record the student names and emails
         final = []
-        for team in temp:
+        for team in range(len(temp)):
             maet = []
-            for stu in team:
+            maet.append("Team "+str(team+1)+": ")
+            for stu in temp[team]:
                 #Append the name and email of the students
                 maet.append([stu[0], stu[1]])
             final.append(maet)
@@ -135,7 +136,7 @@ class Algorithm:
         #Return an integer average score of the team configuration
         return total/len(team_list)
    
-
+    #Function is used by print function to display teams
     def team_print(self, team_list):
         index = 0 #index into student_list
         for team in range(self.team_count):
@@ -145,6 +146,7 @@ class Algorithm:
                 print(self.students[index][1])
                 index += 1
             print("\n") 
+
         for team in range(self.large_teams):
             print("- -Team "+str(team+self.team_count))
             for mem in range(self.team_size+1):
@@ -176,7 +178,7 @@ class Algorithm:
         #TODO The below line is wrong, needs to be fixed if used
         self.team_count += 0 if len(self.students) % newsize else 1
 
-
+    #Function used to randomly shuffle a list in place
     def rand_order(a_list):
         length = len(a_list)
         temp_list = cp.deepcopy(a_list)
