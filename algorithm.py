@@ -22,6 +22,26 @@ class Algorithm:
         #Produce a series of random team assignments
         for i in range(self.iterations):
             self.possible.append(Algorithm.rand_order(self.students))
+        length = len(self.possible[0])
+        for poss in self.possible:
+            old = self.score(poss)
+            for i in range(30):
+                #Swap two random values then check score again
+                x = random.randint(0,length-1)
+                y = random.randint(0,length-1)
+                
+                temp = poss[x]
+                poss[x] = poss[y]
+                poss[y] = temp
+                new = self.score(poss)
+
+                if new > old:
+                    old = new
+                else:
+                    temp = poss[y]
+                    poss[y] = poss[x]
+                    poss[x] = temp
+            #This will run for slef.iterations loops
 
         #Score each team and set best to point at the best one
         for j in range(len(self.possible)):
@@ -35,11 +55,12 @@ class Algorithm:
         #Produce list of lists containing students
         temp = []
         s = self.team_size
+        best = self.possible[self.best[0]]
         for i in range(self.team_count):
-            temp.append(self.students[s*i:s*(i+1)])
+            temp.append(best[s*i:s*(i+1)])
         for i in range(self.large_teams):
-            temp.append(self.students[s*self.team_count+(s+1)*i :
-                                            s*self.team_count+(s+1)*(i+1)] )
+            temp.append( best[s*self.team_count+(s+1)*i :
+                              s*self.team_count+(s+1)*(i+1)] )
 
         #Now record the student names and emails
         final = []
@@ -62,6 +83,7 @@ class Algorithm:
         #Standardize value from 0 to 100
         return int((mySum*(100/12)) // 1)
 
+
     def compare_skill(self, skillA, skillB):
         mySum = 0
         for i in range(len(skillA)):
@@ -69,6 +91,7 @@ class Algorithm:
                 mySum += 1
         #Standardize value from 0 to 100
         return int((mySum*(100/30)) // 1)
+
 
     def score(self, config):
         #Pass in possible ordering and return an int score for ordering
