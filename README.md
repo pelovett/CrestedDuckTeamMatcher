@@ -6,6 +6,7 @@ A tool for creating optimum teams in a class
 
 - [Technologies](#technologies)
 - [Resources Used](#resources-used)
+- [Student Survey](#student-survey)
 - [Install](#install)
 - [License](#license)
 
@@ -21,7 +22,11 @@ A tool for creating optimum teams in a class
 
 
 ## Resources Used
+- [Google Form](https://docs.google.com/forms/d/1HLc7yaeKndD_7YyWikD_idP6vuImYprAhpL_8KFUGhQ/edit?usp=sharing) 
 
+
+## Student Survey
+- This application takes in a parses the student survey results in the form of a CSV file, formatted specifically to how it is exported from Google Forms.  
 
 ## Install
 *Follow these instructions to contribute to the project.*
