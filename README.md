@@ -1,11 +1,15 @@
 # CrestedDuckTeamMatcher
-A tool for creating optimum teams in a class
+A tool for creating optimum teams in a class. Our web application takes in survey results in the form of a CSV file, processes them to create teams based on scheduling and skills, then returns the results to the user displayed on the web interface as well as a CSV.
+- Developers
+    - Cathy Webster
+    - Kathryn Lovett
+    - Peter Lovett
+    - Wyatt Reed
 
 
 ## Table of Contents
 
 - [Technologies](#technologies)
-- [Resources Used](#resources-used)
 - [Student Survey](#student-survey)
 - [Requirements and Design](#requirements-and-design)
 - [Install](#install)
@@ -20,10 +24,7 @@ A tool for creating optimum teams in a class
 - [Yarn](https://yarnpkg.com/) - Facebook's open source JavaScript package manager. There are a few differences between Yarn and Node Package Mangaer (npm), but the main differentiation is that Yarn locks dependencies so your project doesn't break when external resources change their code.
 - [Material UI](http://www.material-ui.com/#/) - A Set of React Components that Implement Google's Material Design.
 - [Flask](http://flask.pocoo.org/) - Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions.
-
-
-## Resources Used
-- [Google Form](https://docs.google.com/forms/d/1HLc7yaeKndD_7YyWikD_idP6vuImYprAhpL_8KFUGhQ/edit?usp=sharing) 
+- [Google Form](https://docs.google.com/forms/d/1HLc7yaeKndD_7YyWikD_idP6vuImYprAhpL_8KFUGhQ/copy) 
 
 
 ## Student Survey
