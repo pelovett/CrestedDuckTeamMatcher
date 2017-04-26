@@ -11,10 +11,6 @@ import MenuItem from 'material-ui/MenuItem';
 import {CSVLink, CSVDownload} from 'react-csv';
 
 
-
-import Main from './Main';
-
-
 injectTapEventPlugin();
 
 const styles = {
@@ -77,10 +73,9 @@ class App extends Component {
     xhr.onreadystatechange = function (oEvent) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          alert(xhr.responseText);
-
+          // Request was successful
+          
           var data = JSON.parse(xhr.responseText);
-          alert(JSON.stringify(data.result));
           this.setState({ csvData: data.result.csv });
         } else {
           alert("Error", xhr.statusText);
@@ -103,17 +98,15 @@ class App extends Component {
     xhr.onreadystatechange = function (oEvent) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          alert(xhr.responseText)
+          // Request was successful
         } else {
           alert("Error", xhr.statusText);
         }
       }
     };
-    alert(JSON.stringify(this.state.csvData));
+
     // Send
     xhr.send(JSON.stringify(this.state.csvData));
-
-    //return this.state.csvData
   }
 
 
@@ -126,7 +119,6 @@ class App extends Component {
     var result = document.getElementById('resultDiv');
     result.style.display = 'block';
 
-    alert("Handle Click called!");
     var formData = new FormData();
 
     var fileInput = document.getElementById('csv_file');
@@ -155,7 +147,6 @@ class App extends Component {
       var result = document.getElementById('resultDiv');
       result.style.display = 'block';
 
-      alert("Handle Click called!");
       var formData = new FormData();
 
       var fileInput = document.getElementById('csv_file');
