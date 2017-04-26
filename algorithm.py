@@ -22,10 +22,7 @@ class Algorithm:
         #Produce a series of random team assignments
         for i in range(self.iterations):
             self.possible.append(Algorithm.rand_order(self.students))
-        #TODO Iterate over every team and make swaps to improve
-        #In order to improve just calculate the worst matches
-        #And swap the other with the other worst match.
-        
+
         #Score each team and set best to point at the best one
         for j in range(len(self.possible)):
             cur_score = self.score(self.possible[j])
@@ -37,12 +34,11 @@ class Algorithm:
     def get_best(self):
         #Produce list of lists containing students
         temp = []
-        best_team = self.possible[self.best[0]]
         s = self.team_size
         for i in range(self.team_count):
-            temp.append(best_team[s*i:s*(i+1)])
+            temp.append(self.students[s*i:s*(i+1)])
         for i in range(self.large_teams):
-            temp.append(best_team[s*self.team_count+(s+1)*i :
+            temp.append(self.students[s*self.team_count+(s+1)*i :
                                             s*self.team_count+(s+1)*(i+1)] )
 
         #Now record the student names and emails
@@ -63,8 +59,16 @@ class Algorithm:
         for i in range(len(schedA)):
             if schedA[i] and schedB[i]:
                 mySum += 1
-        return mySum
+        #Standardize value from 0 to 100
+        return int((mySum*(100/12)) // 1)
 
+    def compare_skill(self, skillA, skillB):
+        mySum = 0
+        for i in range(len(skillA)):
+            if schedA[i] == schedB[i]:
+                mySum += 1
+        #Standardize value from 0 to 100
+        return int((mySum*(100/30)) // 1)
 
     def score(self, config):
         #Pass in possible ordering and return an int score for ordering
@@ -84,6 +88,7 @@ class Algorithm:
         total = 0
         for team in team_list:
             count = len(team)
+            cur_sum = 0
             for mem in range(count):
                 cur = int(mem)
                 while(cur < count):
@@ -91,12 +96,15 @@ class Algorithm:
                     #previous team members bc already compared to us
                     index_b = team[cur]
                     index_a = team[mem]
-                    #Compare the scedules of the two students
-                    total += self.compare_sched(index_a[2], index_b[2])
+                    #Compare the scedules & skills of the two students
+                    cur_sum += self.compare_sched(index_a[2], index_b[2])
+                    cur_sum += self.compare_skill(index_a[3], index_b[3])
+                    
                     cur += 1
-
-        #Return an integer score of the team configuration
-        return total
+            total += cur_sum
+        
+        #Return an integer average score of the team configuration
+        return total/len(team_list)
    
 
     def team_print(self, team_list):
@@ -105,14 +113,14 @@ class Algorithm:
             print(" - - Team "+str(team))
             for mem in range(self.team_size):
                 #Print the name of a student
-                print(team_list[index][1])
+                print(self.students[index][1])
                 index += 1
             print("\n") 
         for team in range(self.large_teams):
             print("- -Team "+str(team+self.team_count))
             for mem in range(self.team_size+1):
                 #Print the name of a student
-                print(team_list[index][1])
+                print(self.students[index][1])
                 index += 1
             print("\n")
 
