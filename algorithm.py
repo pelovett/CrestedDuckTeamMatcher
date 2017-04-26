@@ -65,7 +65,7 @@ class Algorithm:
     def compare_skill(self, skillA, skillB):
         mySum = 0
         for i in range(len(skillA)):
-            if schedA[i] == schedB[i]:
+            if skillA[i] == skillB[i]:
                 mySum += 1
         #Standardize value from 0 to 100
         return int((mySum*(100/30)) // 1)
@@ -100,6 +100,12 @@ class Algorithm:
                     cur_sum += self.compare_sched(index_a[2], index_b[2])
                     cur_sum += self.compare_skill(index_a[3], index_b[3])
                     
+                    #Add perfect score for partner requests
+                    if index_a[4] == index_b[1]:
+                        cur_sum += 100
+                    if index_a[1] == index_b[4]:
+                        cur_sum += 100
+
                     cur += 1
             total += cur_sum
         
