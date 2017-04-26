@@ -7,6 +7,7 @@ A tool for creating optimum teams in a class
 - [Technologies](#technologies)
 - [Resources Used](#resources-used)
 - [Student Survey](#student-survey)
+- [Requirements and Design](#requirements-and-design)
 - [Install](#install)
 - [License](#license)
 
@@ -26,7 +27,17 @@ A tool for creating optimum teams in a class
 
 
 ## Student Survey
-- This application takes in a parses the student survey results in the form of a CSV file, formatted specifically to how it is exported from Google Forms.  
+- Prior to running the application, it's necessary to collect data from students in order to correctly place them into teams.
+- The survey asks the user for the following:
+    - Name
+    - Email
+    - Availability throughout the week
+    - Rank programming/technology skills
+    - Teammate preferences
+- Google Form allows users to export the responses to a CSV file. This application takes in and parses the student survey results in the form of a CSV file, formatted specifically to how it is exported from Google Forms.  
+- An example response can be found in the Git repository named "responses.csv".
+
+## Requirements and Design
 
 ## Install
 *Follow these instructions to contribute to the project.*
