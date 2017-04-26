@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import {CSVLink, CSVDownload} from 'react-csv';
 
 const styles = {
   container: {
@@ -27,6 +28,7 @@ class Result extends Component {
 			if (xhr.readyState === 4) {
 				if (xhr.status === 200) {
 					alert(xhr.responseText)
+
 					// browserHistory.push('result');
 					// this.context.router.push('/result');
 					// this.props.route.parentCallback(xhr.responseText);
@@ -67,6 +69,10 @@ class Result extends Component {
 
 	render() {
 		var data;
+    var csvDatar =[ ['firstname', 'lastname', 'email'],['Ahmed', 'Tomi' , 'ah@smthing.co.com'] ,
+      ['Raed', 'Labes' , 'rl@smthing.co.com'] ,
+      ['Yezzi','Min l3b', 'ymin@cocococo.com']
+    ];
 		if(this.props.csvData == null) {
 			data = "Nothing to show";
 		}
@@ -77,12 +83,18 @@ class Result extends Component {
 			<div className="results-page" style={styles.container}>
 				<h1>The results are in!</h1>
 		        {/*<form id="result-form" action="/transform_csv" method="post">*/}
-		            <RaisedButton 
-		            	label="Get Results" 
+		            <RaisedButton
+		            	label="Get Results"
 		            	onClick={this.handleSubmit}>
 		            	{/*<input type="submit" id="input" style={{ display: 'none' }} />*/}
 		            </RaisedButton>
 		        {/*</form>*/}
+            <CSVLink data={csvDatar}
+              filename={"my-file.csv"}
+              className="btn btn-primary"
+              target="_blank">
+              Download me
+            </CSVLink>
 			</div>
 		);
 	}

@@ -75,12 +75,15 @@ def result():
     print(type(result))
 
     reader_result = reader.read_data(csv_list)
-    flask.session['response'] = reader_result
+    #flask.session['response'] = reader_result
+    x = Algorithm(reader_result)
+    x.generate()
+    y = x.get_best()
 
     #return flask.render_template('result.html')
     #To work with react, comment out the previous return and use the one below
 
-    rslt = { "csv": reader_result}
+    rslt = { "csv": y}
     return jsonify(result=rslt)
 
 

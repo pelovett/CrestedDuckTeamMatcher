@@ -8,6 +8,9 @@ import FlatButton from 'material-ui/FlatButton';
 import Drawer from 'material-ui/Drawer';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MenuItem from 'material-ui/MenuItem';
+import {CSVLink, CSVDownload} from 'react-csv';
+
+
 
 import Main from './Main';
 
@@ -32,6 +35,9 @@ const styles = {
   link: {
     textDecoration: 'none',
     color: 'white',
+    width: 30,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 };
 
@@ -39,8 +45,11 @@ const styles = {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {open: false, csvData: null };
+    this.state = {open: false, csvData: [] };
     this.handleToggle = this.handleToggle.bind(this);
+    this.handle_csv = this.handle_csv.bind(this);
+    this.make_csv = this.make_csv.bind(this);
+
     this.goHome = this.goHome.bind(this);
     this.sendXHRequest = this.sendXHRequest.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -49,6 +58,9 @@ class App extends Component {
 
   handleToggle() {
     this.setState({ open: !this.state.open });
+  }
+  handle_csv(csv_data) {
+    this.setState({ csvData: csv_data });
   }
 
   goHome() {
@@ -66,7 +78,7 @@ class App extends Component {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           alert(xhr.responseText);
-          
+
           var data = JSON.parse(xhr.responseText);
           alert(JSON.stringify(data.result));
           this.setState({ csvData: data.result.csv });
@@ -100,11 +112,13 @@ class App extends Component {
     alert(JSON.stringify(this.state.csvData));
     // Send
     xhr.send(JSON.stringify(this.state.csvData));
+
+    //return this.state.csvData
   }
 
 
-  handleClick(event) {
-    event.preventDefault();
+  make_csv() {
+    //event.preventDefault();
 
     // Switching div from Main to Result
     var main = document.getElementById('mainDiv');
@@ -131,7 +145,37 @@ class App extends Component {
     // location.href = 'result';
   }
 
+
+    handleClick(event) {
+      event.preventDefault();
+
+      // Switching div from Main to Result
+      var main = document.getElementById('mainDiv');
+      main.style.display = 'none';
+      var result = document.getElementById('resultDiv');
+      result.style.display = 'block';
+
+      alert("Handle Click called!");
+      var formData = new FormData();
+
+      var fileInput = document.getElementById('csv_file');
+
+      var file = fileInput.files[0];
+
+      formData.append('csv_file', file);
+
+      // Sending to location defined in form
+      var form = document.getElementById('file-form');
+      var action = form.getAttribute('action');
+
+      var uri = "http://localhost:5000" + action;
+
+      this.sendXHRequest(formData, uri);
+      // location.href = 'result';
+    }
+
   render() {
+    this.make_csv;
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <div className="App">
@@ -140,8 +184,8 @@ class App extends Component {
             onLeftIconButtonTouchTap={this.handleToggle}
             iconElementRight={<FlatButton label="Home" />}
             onRightIconButtonTouchTap={this.goHome}/>
-          <Drawer 
-            open={this.state.open} 
+          <Drawer
+            open={this.state.open}
             docked={false}>
             <MenuItem onTouchTap={this.handleToggle} value={'/'} primaryText="Hide"/>
             <MenuItem>
@@ -179,9 +223,13 @@ class App extends Component {
           </div>
           <div className="Result" style={styles.result} id="resultDiv">
             <h1>The results are in!</h1>
-              <RaisedButton 
-                label="Get Results" 
-                onClick={this.resultXHRequest}>
+              <RaisedButton>
+              <CSVLink data={this.state.csvData} style={styles.link}
+                filename={"TeamsByRow.csv"}
+                className="btn btn-primary"
+                target="_blank">
+                Download
+              </CSVLink>
               </RaisedButton>
           </div>
         </div>
