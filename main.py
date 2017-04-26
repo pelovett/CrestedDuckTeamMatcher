@@ -67,64 +67,18 @@ def result():
     csv_input = csv.reader(stream)
 
     for row in csv_input:
-        print(row)
         csv_list.append(row)
 
     stream.seek(0)
     result = transform(stream.read())
-    print(type(result))
 
     reader_result = reader.read_data(csv_list)
-    #flask.session['response'] = reader_result
     x = Algorithm(reader_result)
     x.generate()
     y = x.get_best()
 
-    #return flask.render_template('result.html')
-    #To work with react, comment out the previous return and use the one below
-
     rslt = { "csv": y}
     return jsonify(result=rslt)
-
-
-@app.route('/transform_csv', methods=['GET', 'POST'])
-def transform_csv():
-
-    #result = flask.session['response']
-    print(request.json)
-    result = request.json
-
-    #Get the Algorithm Data (THX PETER)
-    x = Algorithm(result)
-    x.generate()
-    y = x.get_best()
-
-    #Can't write to a file, so we're going to make an IO Stream
-    output = io.StringIO()
-    writer = csv.writer(output, quoting=csv.QUOTE_NONNUMERIC)
-    writer.writerows(y)
-    print(output.getvalue())
-
-    csv_input = csv.reader(output)
-    for row in csv_input:
-        print(row)
-
-    output.seek(0)
-    result = transform(output.read())
-
-    response = make_response(result)
-
-    print("from /transform_csv:"+result)
-    return response
-
-#JSON callback implementation
-'''function execute_solved() {
-     $.getJSON('/_solved',function(data) {
-       console.log("data: " + data)
-       csv = data.result.csv;
-       location.href = 'result';
-     });
-   }'''
 
 @app.errorhandler(404)
 def page_not_found(error):
