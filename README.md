@@ -35,7 +35,8 @@ A tool for creating optimum teams in a class. Our web application takes in surve
     - Availability throughout the week
     - Rank programming/technology skills
     - Teammate preferences
-- Google Form allows users to export the responses to a CSV file. This application takes in and parses the student survey results in the form of a CSV file, formatted specifically to how it is exported from Google Forms.  
+- Google Form allows users to export the responses to a CSV file. This application takes in and parses the student survey results in the form of a CSV file, formatted specifically to how it is exported from Google Forms.
+- To copy a google form that will output a CSV that is compatible with this project: [Click Here](https://docs.google.com/forms/d/1HLc7yaeKndD_7YyWikD_idP6vuImYprAhpL_8KFUGhQ/copy)
 - An example response can be found in the Git repository named "responses.csv".
 
 ## Requirements and Design
