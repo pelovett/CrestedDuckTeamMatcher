@@ -89,6 +89,13 @@ A tool for creating optimum teams in a class. Our web application takes in surve
 
 
 **Install dependencies:**  
+
+If you're running Ubuntu14 you must install pyvenv first:
+
+- `apt-get install python-venv`
+- `apt-get install python3-venv`
+- `apt-get install python3-pip`
+
 From inside of CrestedDuckTeamMatcher:  
 
 - `bash ./configure`
