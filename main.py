@@ -56,12 +56,22 @@ def index():
 def transform(text_file_contents):
     return text_file_contents.replace("=", ",")
 
+@app.route('/team_size', methods=['POST'])
+def team_size():
+  s = request.form.get('teamsize')
+  if not s:
+    return "No-kay"
+  print(s)
+  flask.session['teamsize'] = s
+  return "A-okay"
+
 @app.route('/result', methods=['POST'])
 def result():
     f = request.files['csv_file']
     if not f:
         return "No file"
-
+    print(request.args.get('teamsize'))
+    teamsize = request.args.get('teamsize')
     csv_list = []
     stream = io.StringIO(f.stream.read().decode("UTF8"), newline=None)
     csv_input = csv.reader(stream)

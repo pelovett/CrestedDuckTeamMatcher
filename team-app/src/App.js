@@ -9,14 +9,14 @@ import Drawer from 'material-ui/Drawer';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MenuItem from 'material-ui/MenuItem';
 import {CSVLink, CSVDownload} from 'react-csv';
-
+import DropDownMenu from 'material-ui/DropDownMenu';
 
 injectTapEventPlugin();
 
 const styles = {
   main: {
     textAlign: 'center',
-    paddingTop: 200,
+    paddingTop: 150,
   },
   result: {
     textAlign: 'center',
@@ -35,13 +35,17 @@ const styles = {
     paddingLeft: 10,
     paddingRight: 10,
   },
+  menu: {
+    backgroundColor: '#0097A7', 
+    textColor: '#212121',
+  },
 };
 
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {open: false, csvData: [] };
+    this.state = {open: false, csvData: [], value: 3};
     this.handleToggle = this.handleToggle.bind(this);
     this.handle_csv = this.handle_csv.bind(this);
     this.make_csv = this.make_csv.bind(this);
@@ -50,6 +54,7 @@ class App extends Component {
     this.sendXHRequest = this.sendXHRequest.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.resultXHRequest = this.resultXHRequest.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleToggle() {
@@ -63,7 +68,7 @@ class App extends Component {
     location.href = "/";
   }
 
-  sendXHRequest(formData, uri) {
+  sendXHRequest(postData, uri) {
     // Get an XMLHttpRequest instance
     var xhr = new XMLHttpRequest();
 
@@ -84,7 +89,7 @@ class App extends Component {
     }.bind(this);
 
     // Send
-    xhr.send(formData);
+    xhr.send(postData);
   }
 
   resultXHRequest(uri) {
@@ -134,36 +139,40 @@ class App extends Component {
     var uri = "http://localhost:5000" + action;
 
     this.sendXHRequest(formData, uri);
-    // location.href = 'result';
   }
 
+  handleClick(event) {
+    event.preventDefault();
 
-    handleClick(event) {
-      event.preventDefault();
+    // Switching div from Main to Result
+    var main = document.getElementById('mainDiv');
+    main.style.display = 'none';
+    var result = document.getElementById('resultDiv');
+    result.style.display = 'block';
 
-      // Switching div from Main to Result
-      var main = document.getElementById('mainDiv');
-      main.style.display = 'none';
-      var result = document.getElementById('resultDiv');
-      result.style.display = 'block';
+    var formData = new FormData();
 
-      var formData = new FormData();
+    var fileInput = document.getElementById('csv_file');
 
-      var fileInput = document.getElementById('csv_file');
+    var file = fileInput.files[0];
 
-      var file = fileInput.files[0];
+    formData.append('team_size', this.state.value);
+    formData.append('csv_file', file);
 
-      formData.append('csv_file', file);
+    // Sending to location defined in form
+    var form = document.getElementById('file-form');
+    var action = form.getAttribute('action');
 
-      // Sending to location defined in form
-      var form = document.getElementById('file-form');
-      var action = form.getAttribute('action');
+    var uri = "http://localhost:5000";
+    // var params = "teamsize=" + this.state.value;
+    var secForm = new FormData();
+    secForm.append('teamsize', this.state.value);
 
-      var uri = "http://localhost:5000" + action;
+    this.sendXHRequest(secForm, uri+"/team_size");
+    this.sendXHRequest(formData, uri+action+"?teamsize="+this.state.value);
+  }
 
-      this.sendXHRequest(formData, uri);
-      // location.href = 'result';
-    }
+  handleChange = (event, index, value) => this.setState({value});
 
   render() {
     this.make_csv;
@@ -193,23 +202,34 @@ class App extends Component {
             </MenuItem>
           </Drawer>
           <div className="Main" style={styles.main} id="mainDiv">
-            <h2>Time to match teams!</h2>
+            <h1>Time to match teams!</h1>
             <p>Upload your .csv file to get started.</p>
             <form id="file-form" action="/result" encType="multipart/form-data" method="POST">
-                <RaisedButton containerElement="label" label="Select File" primary={true}>
-                  <input
-                    type="file"
-                    id="csv_file"
-                    name="csv_file"
-                    style={{ display: 'none' }} />
-                </RaisedButton>
-                <div style={styles.divider} />
-                <RaisedButton
-                  type="submit"
-                  id="upload-button"
-                  onClick={this.handleClick}
-                  style={{textColor: 'white' }}
-                  primary={true}>Upload</RaisedButton>
+              <RaisedButton containerElement="label" label="Select File" primary={true}>
+                <input
+                  type="file"
+                  id="csv_file"
+                  name="csv_file"
+                  style={{ display: 'none' }} />
+              </RaisedButton>
+              <br />
+              <p>Select your desired team size.</p>
+              <DropDownMenu 
+                value={this.state.value} 
+                onChange={this.handleChange}
+                style={styles.menu}>
+                <MenuItem value={2} primaryText="Team of Two" />
+                <MenuItem value={3} primaryText="Team of Three" />
+                <MenuItem value={4} primaryText="Team of Four" />
+                <MenuItem value={5} primaryText="Team of Five" />
+              </DropDownMenu>
+              <br />
+              <p>...and submit!</p>
+              <RaisedButton
+                type="submit"
+                id="upload-button"
+                onClick={this.handleClick}
+                primary={true}>Submit</RaisedButton>
             </form>
           </div>
           <div className="Result" style={styles.result} id="resultDiv">
