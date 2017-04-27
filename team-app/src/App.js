@@ -45,7 +45,7 @@ const styles = {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {open: false, csvData: [], value: 3};
+    this.state = {open: false, csvData: [], value: 3, label: "Select File"};
     this.handleToggle = this.handleToggle.bind(this);
     this.handle_csv = this.handle_csv.bind(this);
     this.make_csv = this.make_csv.bind(this);
@@ -55,6 +55,7 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.resultXHRequest = this.resultXHRequest.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.updateLabel = this.updateLabel.bind(this);
   }
 
   handleToggle() {
@@ -170,6 +171,13 @@ class App extends Component {
 
   handleChange = (event, index, value) => this.setState({value});
 
+  updateLabel() {
+    var fileInput = document.getElementById('csv_file');
+    var file = fileInput.files[0];
+
+    this.setState({label:file.name});
+  }
+
   render() {
     this.make_csv;
     return (
@@ -201,12 +209,13 @@ class App extends Component {
             <h1>Time to match teams!</h1>
             <p>Upload your .csv file to get started.</p>
             <form id="file-form" action="/result" encType="multipart/form-data" method="POST">
-              <RaisedButton containerElement="label" label="Select File" primary={true}>
+              <RaisedButton id="file-button" containerElement="label" label={this.state.label} primary={true}>
                 <input
                   type="file"
                   id="csv_file"
                   name="csv_file"
-                  style={{ display: 'none' }} />
+                  style={{ display: 'none' }} 
+                  onChange={this.updateLabel} />
               </RaisedButton>
               <br />
               <p>Select your desired team size.</p>
