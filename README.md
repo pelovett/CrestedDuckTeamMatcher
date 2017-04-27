@@ -24,7 +24,7 @@ A tool for creating optimum teams in a class. Our web application takes in surve
 - [Yarn](https://yarnpkg.com/) - Facebook's open source JavaScript package manager. There are a few differences between Yarn and Node Package Mangaer (npm), but the main differentiation is that Yarn locks dependencies so your project doesn't break when external resources change their code.
 - [Material UI](http://www.material-ui.com/#/) - A Set of React Components that Implement Google's Material Design.
 - [Flask](http://flask.pocoo.org/) - Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions.
-- [Google Form](https://docs.google.com/forms/d/1HLc7yaeKndD_7YyWikD_idP6vuImYprAhpL_8KFUGhQ/copy) 
+- [Google Form](https://docs.google.com/forms/d/1HLc7yaeKndD_7YyWikD_idP6vuImYprAhpL_8KFUGhQ/copy) - Online form/survey to collect data
 
 
 ## Student Survey
@@ -43,7 +43,10 @@ A tool for creating optimum teams in a class. Our web application takes in surve
     - Algorithm that matches people into groups based on schedule and skill set compatibility
     - Simple and intuitive user-interface that allows user to upload CSV file with responses from a student survey
     - User can download a CSV file with the results of the algorithm
+- Future Versions   
     - Expanded app to allow user to customize group sizes
+    - Made the web app more interactive i.e. you can move around the list of students on the results page
+    - Make the application all browser compatible
 - Key files for the application
     - algorithm.py: code for logic for team formation
     - main.py: code for server-side logic.
@@ -53,7 +56,10 @@ A tool for creating optimum teams in a class. Our web application takes in surve
 
 
 ## Install
+*Users can run the application using these steps*
 *Follow these instructions to contribute to the project.*
+
+**!! This app is only compatible with Google Chrome or Safari !!**
 
 **Clone this repository.**
 
