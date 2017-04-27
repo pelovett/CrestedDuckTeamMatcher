@@ -43,8 +43,9 @@ A tool for creating optimum teams in a class. Our web application takes in surve
     - Algorithm that matches people into groups based on schedule and skill set compatibility
     - Simple and intuitive user-interface that allows user to upload CSV file with responses from a student survey
     - User can download a CSV file with the results of the algorithm
-- Future Versions   
-    - Expanded app to allow user to customize group sizes
+    - App can allow user to set desired group sizes
+- Future Versions 
+    - Display the groups on the result page
     - Made the web app more interactive i.e. you can move around the list of students on the results page
     - Make the application all browser compatible
 - Key files for the application
