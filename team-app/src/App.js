@@ -163,13 +163,9 @@ class App extends Component {
     var form = document.getElementById('file-form');
     var action = form.getAttribute('action');
 
-    var uri = "http://localhost:5000";
-    // var params = "teamsize=" + this.state.value;
-    var secForm = new FormData();
-    secForm.append('teamsize', this.state.value);
+    var uri = "http://localhost:5000"+action;
 
-    this.sendXHRequest(secForm, uri+"/team_size");
-    this.sendXHRequest(formData, uri+action+"?teamsize="+this.state.value);
+    this.sendXHRequest(formData, uri);
   }
 
   handleChange = (event, index, value) => this.setState({value});
