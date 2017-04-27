@@ -90,7 +90,7 @@ A tool for creating optimum teams in a class. Our web application takes in surve
 
 **Install dependencies:**  
 
-If you're running Ubuntu14 you must install pyvenv first:
+If you're running Ubuntu14+ you must install pyvenv first:
 
 - `apt-get install python-venv`
 - `apt-get install python3-venv`
@@ -99,12 +99,15 @@ If you're running Ubuntu14 you must install pyvenv first:
 From inside of CrestedDuckTeamMatcher:  
 
 - `bash ./configure`
+- `make run`
+
+if there are issue, attempt:
 
 - `pip3 install flask`
 
 - `pip3 install flask_cors`
 
-In a new tab in Terminal:  
+In a new tab/window in Terminal (inside CrestedDuckTeamMatcher):  
 
 - `cd team-app`
 
