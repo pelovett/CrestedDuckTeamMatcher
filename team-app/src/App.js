@@ -231,12 +231,12 @@ class App extends Component {
           <div className="Result" style={styles.result} id="resultDiv">
             <h1>The results are in!</h1>
               <RaisedButton>
-              <CSVLink data={this.state.csvData} style={styles.link}
-                filename={"TeamsByRow.csv"}
-                className="btn btn-primary"
-                target="_blank">
-                Download
-              </CSVLink>
+                <CSVLink data={this.state.csvData} style={styles.link}
+                  filename={"TeamsByRow.csv"}
+                  className="btn btn-primary"
+                  target="_blank">
+                  Download
+                </CSVLink>
               </RaisedButton>
           </div>
         </div>

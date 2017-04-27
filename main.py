@@ -61,8 +61,8 @@ def result():
     f = request.files['csv_file']
     if not f:
         return "No file"
-    teamsize = request.form['team_size']
-    print("Desired team size: ", teamsize)
+    team_size = request.form['team_size']
+    print("Desired team size: ", team_size)
 
     csv_list = []
     stream = io.StringIO(f.stream.read().decode("UTF8"), newline=None)
@@ -78,7 +78,7 @@ def result():
 
     reader_result = reader.read_data(csv_list)
     #flask.session['response'] = reader_result
-    x = Algorithm(reader_result)
+    x = Algorithm(reader_result, teamsize=int(team_size))
     x.generate()
     y = x.get_best()
 
