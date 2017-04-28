@@ -41,7 +41,6 @@ const styles = {
   },
 };
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -234,7 +233,8 @@ class App extends Component {
                 type="submit"
                 id="upload-button"
                 onClick={this.handleClick}
-                primary={true}>Submit</RaisedButton>
+                label="Submit"
+                primary={true}></RaisedButton>
             </form>
           </div>
           <div className="Result" style={styles.result} id="resultDiv">
