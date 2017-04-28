@@ -4,15 +4,15 @@
 pid=$(lsof -i:5000 -t) 
 
 if [ pid != "" ]; then
-	name=cat /proc/$pid/cmdline
 
-	echo "Would you like to close $name ?"
+	echo "Would you like to close the application running on port 5000?"
 
 	read answer
 
-	if (answer=="y"); then
-			kill -TERM $pid || kill -KILL $pidt
+	if [ "$answer" == "y" ]
+	then
+		kill -TERM $pid || kill -KILL $pidt
 	else
-			echo "Closing script"
+		echo "Closing script"
 	fi
 fi
