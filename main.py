@@ -28,7 +28,6 @@ import reader
 # Globals
 ###
 app = flask.Flask(__name__)
-app.secret_key = "hello"
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -96,7 +95,6 @@ def page_not_found(error):
 # Set up to run from cgi-bin script, from
 # gunicorn, or stand-alone.
 #
-app.secret_key = CONFIG.secret_key
 app.debug=CONFIG.DEBUG
 app.logger.setLevel(logging.DEBUG)
 if __name__ == "__main__":
